@@ -1,13 +1,19 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 signal bullet_shot(b)
+signal died
 
 @export var acceleration := 10.0
 @export var max_speed := 350.0
 @export var rotation_speed := 250.0
 
 @onready var muzzle = $Muzzle
+@onready var sprite = $Sprite2D
+@onready var cshape = $CollisionShape2D
+
 var bullet_scene = preload("res://scenes/bullet.tscn")
+
+var alive := true
 
 func _process(delta):
 	if Input.is_action_just_pressed("shoot"):
@@ -45,3 +51,18 @@ func shoot_bullet():
 	b.global_position = muzzle.global_position
 	b.rotation = rotation
 	emit_signal("bullet_shot", b)
+
+func die():
+	if alive==true:
+		alive = false
+		sprite.visible = false
+		cshape.set_deferred("disabled", true)
+		emit_signal("died")
+
+func respawn(pos):
+	if alive==false:
+		alive = true
+		global_position = pos
+		velocity = Vector2.ZERO
+		sprite.visible = true
+		cshape.set_deferred("disabled", false)
