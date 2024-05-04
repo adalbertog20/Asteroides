@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfr4v0a5kepw6"]
+[gd_scene load_steps=4 format=3 uid="uid://dfr4v0a5kepw6"]
 
 [ext_resource type="PackedScene" uid="uid://eshj5nxglydy" path="res://scenes/player.tscn" id="1_1ybuq"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_byfcm"]
+[ext_resource type="PackedScene" uid="uid://rtiq317a0d7h" path="res://scenes/asteroid.tscn" id="3_6ko07"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_byfcm")
@@ -10,3 +11,17 @@ script = ExtResource("1_byfcm")
 position = Vector2(640, 360)
 
 [node name="Bullets" type="Node" parent="."]
+
+[node name="Asteroids" type="Node" parent="."]
+
+[node name="Asteroid" parent="Asteroids" instance=ExtResource("3_6ko07")]
+position = Vector2(295, 491)
+
+[node name="Asteroid2" parent="Asteroids" instance=ExtResource("3_6ko07")]
+position = Vector2(861, 459)
+
+[node name="Asteroid3" parent="Asteroids" instance=ExtResource("3_6ko07")]
+position = Vector2(579, 594)
+
+[node name="Asteroid4" parent="Asteroids" instance=ExtResource("3_6ko07")]
+position = Vector2(978, 281)
